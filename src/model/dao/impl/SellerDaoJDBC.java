@@ -93,10 +93,18 @@ try {
 
 	@Override
 	public void deleteByid(Integer id) {
-		// TODO Auto-generated method stub
+		PreparedStatement st=null;
+try {		
+		st=conn.prepareStatement("DELETE FROM seller WHERE id=?");
+		st.setInt(1, id);
+		st.executeUpdate();
 		
+}catch(SQLException e) {
+	throw new DbException(e.getMessage());
+}finally {
+	DB.closeStatement(st);
+}
 	}
-
 	@Override
 	public Seller findById(Integer id) {
 		PreparedStatement st=null;
